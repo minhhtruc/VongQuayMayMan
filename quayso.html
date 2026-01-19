@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Số</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>🎲 Random Số</h1>
+    <p class="subtitle">Chọn khoảng số để quay</p>
+
+    <div class="range">
+        <input type="number" id="min" placeholder="Từ">
+        <span class="dash">—</span>
+        <input type="number" id="max" placeholder="Đến">
+    </div>
+
+    <div class="buttons">
+        <button class="spin-btn" onclick="spin()">QUAY SỐ</button>
+        <button class="reset-btn" onclick="resetGame()">RESET</button>
+    </div>
+
+    <div class="result">
+        <p>Kết quả</p>
+        <h2 id="result">---</h2>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

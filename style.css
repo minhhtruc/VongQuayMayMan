@@ -1,0 +1,117 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #4a6cf7, #6f8cff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: #ffffff;
+    width: 340px;
+    padding: 30px 25px;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.subtitle {
+    margin: 6px 0 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.range {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.range input {
+    width: 42%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.range input:focus {
+    outline: none;
+    border-color: #4a6cf7;
+}
+
+.dash {
+    font-size: 18px;
+    color: #555;
+}
+
+.spin-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #4a6cf7;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.spin-btn:hover {
+    background: #3b5bdb;
+    transform: translateY(-1px);
+}
+
+.result {
+    margin-top: 25px;
+}
+
+.result p {
+    margin: 0;
+    font-size: 14px;
+    color: #777;
+}
+
+.result h2 {
+    margin-top: 8px;
+    font-size: 42px;
+    color: #e63946;
+    letter-spacing: 2px;
+}
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.reset-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #adb5bd;
+    color: #333;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.reset-btn:hover {
+    background: #868e96;
+}
+
