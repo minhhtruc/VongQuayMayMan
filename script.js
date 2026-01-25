@@ -1,5 +1,5 @@
 // ===== CẤU HÌNH =====
-const FORCE_NUMBERS = [6, 17, 22, 50];
+const FORCE_NUMBERS = [15, 6, 35, 10, 50, 14, 17, 34, 56, 22];
 const BLACKLIST = [4, 9, 49, 30, 29, 39, 54, 64, 23];
 
 // ===== BIẾN =====
@@ -17,7 +17,6 @@ let currentAngle = 0;
 let spinning = false;
 
 // ===== QUAY =====
-// ===== QUAY (ĐÃ FIX) =====
 function spin() {
     if (spinning) return;
 
@@ -35,8 +34,8 @@ function spin() {
     let value;
 
     // ===== XÁC ĐỊNH SỐ TRÚNG =====
-    if (spinCount <= 10 && forcedMap.has(spinCount)) {
-        value = forcedMap.get(spinCount);
+    if (spinCount <= 10 && spinCount <= FORCE_NUMBERS.length) {
+        value = FORCE_NUMBERS[spinCount - 1];
     } else {
         if (!validNumbers.length) {
             alert("Hết số!");
@@ -58,7 +57,6 @@ function spin() {
     });
 }
 
-
 // ===== RESET DATA =====
 function resetData(min, max) {
     spinCount = 0;
@@ -68,10 +66,6 @@ function resetData(min, max) {
     const forced = FORCE_NUMBERS.filter(
         n => n >= min && n <= max && !BLACKLIST.includes(n)
     );
-
-    const slots = generateNonAdjacentSlots(10, forced.length);
-    shuffleArray(forced);
-    slots.forEach((s, i) => forcedMap.set(s, forced[i]));
 
     const all = Array.from({ length: max - min + 1 }, (_, i) => i + min);
     
