@@ -1,6 +1,6 @@
 // ===== CẤU HÌNH =====
-const FORCE_NUMBERS = [15, 6, 35, 10, 50, 14, 17, 34, 56, 22];
-const BLACKLIST = [4, 9, 49, 30, 29, 39, 54, 64, 23];
+// const FORCE_NUMBERS = [15, 6, 35, 10, 50, 14, 17, 34, 56, 22];
+// const BLACKLIST = [4, 9, 49, 30, 29, 39, 54, 64, 23];
 
 // ===== BIẾN =====
 let validNumbers = [];
@@ -30,19 +30,28 @@ function spin() {
 
     if (min !== lastMin || max !== lastMax) resetData(min, max);
 
+    if (!validNumbers.length) {
+        alert("Hết số!");
+        return;
+    }
+
     spinCount++;
     let value;
 
     // ===== XÁC ĐỊNH SỐ TRÚNG =====
-    if (spinCount <= 10 && spinCount <= FORCE_NUMBERS.length) {
-        value = FORCE_NUMBERS[spinCount - 1];
-    } else {
-        if (!validNumbers.length) {
-            alert("Hết số!");
-            return;
-        }
-        value = validNumbers[Math.floor(Math.random() * validNumbers.length)];
-    }
+    // --- ĐÃ TẮT: cơ chế ép số cho 10 lượt quay đầu ---
+    // if (spinCount <= 10 && spinCount <= FORCE_NUMBERS.length) {
+    //     value = FORCE_NUMBERS[spinCount - 1];
+    // } else {
+    //     if (!validNumbers.length) {
+    //         alert("Hết số!");
+    //         return;
+    //     }
+    //     value = validNumbers[Math.floor(Math.random() * validNumbers.length)];
+    // }
+
+    // --- ĐANG DÙNG: ngẫu nhiên 100% mọi lượt ---
+    value = validNumbers[Math.floor(Math.random() * validNumbers.length)];
 
     // ===== QUAY VỚI TẤT CẢ SỐ =====
     spinWheelTo(value, wheelNumbers, () => {
@@ -63,17 +72,21 @@ function resetData(min, max) {
     forcedMap.clear();
     currentAngle = 0;
 
-    const forced = FORCE_NUMBERS.filter(
-        n => n >= min && n <= max && !BLACKLIST.includes(n)
-    );
+    // --- ĐÃ TẮT: lọc số ép ra khỏi danh sách hợp lệ ---
+    // const forced = FORCE_NUMBERS.filter(
+    //     n => n >= min && n <= max && !BLACKLIST.includes(n)
+    // );
 
     const all = Array.from({ length: max - min + 1 }, (_, i) => i + min);
-    
+
     // Tất cả số hiển thị trên vòng (bao gồm blacklist)
     wheelNumbers = [...all];
-    
-    // Chỉ số hợp lệ để quay (không có blacklist và forced)
-    validNumbers = all.filter(n => !BLACKLIST.includes(n) && !forced.includes(n));
+
+    // --- ĐÃ TẮT: chỉ số hợp lệ để quay (không có blacklist và forced) ---
+    // validNumbers = all.filter(n => !BLACKLIST.includes(n) && !forced.includes(n));
+
+    // --- ĐANG DÙNG: tất cả số đều hợp lệ để quay ngẫu nhiên ---
+    validNumbers = [...all];
 
     drawWheel(wheelNumbers);
     lastMin = min;
@@ -116,7 +129,7 @@ function drawWheel(numbers, winningNumber = null) {
             ["#6a4c93", "#9d4edd"]
         ];
         const colorPair = colors[i % colors.length];
-        
+
         const grad = ctx.createRadialGradient(c, c, 20, c, c, r);
         if (isWinner) {
             grad.addColorStop(0, "#ffd700");
@@ -150,7 +163,7 @@ function drawWheel(numbers, winningNumber = null) {
         ctx.translate(c, c);
         ctx.rotate(start + step / 2);
         ctx.textAlign = "right";
-        
+
         if (isWinner) {
             ctx.fillStyle = "#fff";
             ctx.font = "bold 16px sans-serif";
@@ -161,7 +174,7 @@ function drawWheel(numbers, winningNumber = null) {
             ctx.fillStyle = "#1a1a1a";
             ctx.font = "bold 14px sans-serif";
         }
-        
+
         ctx.fillText(num, r - 12, 6);
         ctx.restore();
     });
